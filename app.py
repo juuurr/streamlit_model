@@ -12,6 +12,7 @@ model = load_model('keras_model.h5', compile=False)
 # Load the labels
 class_names = open('labels.txt', 'r').readlines()
 
+st.header('김고은 이대로 괜찮은가')
 st.header('이수지 vs 김고은 vs 싸이')
 
 
@@ -26,6 +27,7 @@ uploaded_file = st.file_uploader("파일을 업로드하세요", type=["jpg", "j
 if uploaded_file is not None:
     # Replace this with the path to your image
     image = Image.open(uploaded_file).convert("RGB")
+    st.image(image)
 
     # resizing the image to be at least 224x224 and then cropping from the center
     size = (224, 224)
