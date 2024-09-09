@@ -20,11 +20,12 @@ st.header('이수지 vs 김고은 vs 싸이')
 # determined by the first position in the shape tuple, in this case 1
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-img_file_buffer = st.camera_input("정중앙에 사물을 위치하고 사진찍기 버튼을 누르세요")
+uploaded_file = st.file_uploader("파일을 업로드하세요", type=["jpg", "jpeg", "png"])
+#img_file_buffer = st.camera_input("정중앙에 사물을 위치하고 사진찍기 버튼을 누르세요")
 
-if img_file_buffer is not None:
+if uploaded_file is not None:
     # Replace this with the path to your image
-    image = Image.open("<IMAGE_PATH>").convert("RGB")
+    image = Image.open(uploaded_file).convert("RGB")
 
     # resizing the image to be at least 224x224 and then cropping from the center
     size = (224, 224)
