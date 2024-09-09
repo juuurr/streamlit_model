@@ -1,0 +1,2 @@
+- teachablemachine에서 모델 학습
+- python 3.11 버전에서 tensorflow 2.12.0 버전을 사용
