@@ -7,10 +7,10 @@ import streamlit as st
 np.set_printoptions(suppress=True)
 
 # Load the model
-model = load_model("keras_Model.h5", compile=False)
+model = load_model('keras_model.h5', compile=False)
 
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+class_names = open('labels.txt', 'r').readlines()
 
 st.header('이수지 vs 김고은 vs 싸이')
 
@@ -35,17 +35,25 @@ if uploaded_file is not None:
     image_array = np.asarray(image)
 
     # Normalize the image
+    # 모델이 학습했을 때 Nomalize 한 방식대로 이미지를 Nomalize 
     normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
 
     # Load the image into the array
+    # 빈 ARRAY에 전처리를 완료한 이미지를 복사
     data[0] = normalized_image_array
 
     # Predicts the model
+    # h5 모델에 예측 의뢰 
     prediction = model.predict(data)
+
+    # 높은 신뢰도가 나온 인덱의 인덱스 자리를 저장
     index = np.argmax(prediction)
+
+    # labels.txt 파일에서 가져온 값을 index로 호출
     class_name = class_names[index]
+    # 예측 결과에서 신뢰도를 꺼내 옵니다  
     confidence_score = prediction[0][index]
 
     # Print prediction and confidence score
-    print("Class:", class_name[2:], end="")
-    print("Confidence Score:", confidence_score)
+    st.write('Class:', class_name[2:], end="")
+    st.write('Confidence score:', confidence_score)
